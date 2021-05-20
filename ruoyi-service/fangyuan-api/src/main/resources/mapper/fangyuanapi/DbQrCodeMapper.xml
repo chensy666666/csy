@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.fangyuanapi.mapper.DbQrCodeMapper">
+    
+    <resultMap type="DbQrCode" id="DbQrCodeResult">
+        <result property="qrCodeId"    column="qr_code_id"    />
+        <result property="heartbeatText"    column="heartbeat_text"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="firstTimeBinding"    column="first_time_binding"    />
+        <result property="adminUserId"    column="admin_user_id"    />
+        <result property="equipmentId"    column="equipment_id"    />
+        <result property="qrCodeUrl"    column="qr_code_url"    />
+        <result property="qrCodePic"    column="qr_code_pic"    />
+        <result property="equipmentProductionSite"    column="equipment_production_site"  />
+        <result property="equipmentProductionBatch"    column="equipment_production_batch"  />
+        <result property="equipmentProductionDate"    column="equipment_production_date"  />
+        <result property="equipmentModel"    column="equipment_model"  />
+        <result property="adminPhone"    column="admin_phone"  />
+        <result property="adminAddress"    column="admin_address"  />
+    </resultMap>
+
+    <sql id="selectDbQrCodeVo">
+        select qr_code_id, heartbeat_text, create_time,equipment_production_site,equipment_production_batch,equipment_production_date,equipment_model, first_time_binding, admin_user_id, equipment_id, qr_code_url, qr_code_pic,admin_phone,admin_address from db_qr_code
+    </sql>
+
+    <select id="selectDbQrCodeList" parameterType="DbQrCode" resultMap="DbQrCodeResult">
+        <include refid="selectDbQrCodeVo"/>
+        <where>  
+        </where>
+    </select>
+    
+    <select id="selectDbQrCodeById" parameterType="Long" resultMap="DbQrCodeResult">
+        <include refid="selectDbQrCodeVo"/>
+        where qr_code_id = #{qrCodeId}
+    </select>
+        
+    <insert id="insertDbQrCode" parameterType="DbQrCode" useGeneratedKeys="true" keyProperty="qrCodeId" keyColumn="qrCodeId">
+        insert into db_qr_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="heartbeatText != null  and heartbeatText != ''">heartbeat_text,</if>
+            <if test="createTime != null ">create_time,</if>
+            <if test="firstTimeBinding != null ">first_time_binding,</if>
+            <if test="adminUserId != null ">admin_user_id,</if>
+            <if test="equipmentId != null ">equipment_id,</if>
+            <if test="qrCodeUrl != null  and qrCodeUrl != ''">qr_code_url,</if>
+            <if test="equipmentProductionSite != null  and equipmentProductionSite != ''">equipment_production_site,</if>
+            <if test="equipmentProductionBatch != null  and equipmentProductionBatch != ''">equipment_production_batch,</if>
+            <if test="equipmentProductionDate != null  and equipmentProductionDate != ''">equipment_production_date,</if>
+            <if test="equipmentModel != null  and equipmentModel != ''">equipment_model,</if>
+            <if test="qrCodePic != null  and qrCodePic != ''">qr_code_pic,</if>
+            <if test="adminPhone != null  and adminPhone != ''">admin_phone,</if>
+            <if test="adminAddress != null  and adminAddress != ''">admin_address,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="heartbeatText != null  and heartbeatText != ''">#{heartbeatText},</if>
+            <if test="createTime != null ">#{createTime},</if>
+            <if test="firstTimeBinding != null ">#{firstTimeBinding},</if>
+            <if test="adminUserId != null ">#{adminUserId},</if>
+            <if test="equipmentId != null ">#{equipmentId},</if>
+            <if test="qrCodeUrl != null  and qrCodeUrl != ''">#{qrCodeUrl},</if>
+            <if test="qrCodePic != null  and qrCodePic != ''">#{qrCodePic},</if>
+            <if test="equipmentProductionSite != null  and equipmentProductionSite != ''">#{equipmentProductionSite},</if>
+            <if test="equipmentProductionBatch != null  and equipmentProductionBatch != ''">#{equipmentProductionBatch},</if>
+            <if test="equipmentProductionDate != null  and equipmentProductionDate != ''">#{equipmentProductionDate},</if>
+            <if test="equipmentModel != null  and equipmentModel != ''">#{equipmentModel},</if>
+            <if test="adminPhone != null  and adminPhone != ''">#{adminPhone},</if>
+            <if test="adminAddress != null  and adminAddress != ''">#{adminAddress},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDbQrCode" parameterType="DbQrCode">
+        update db_qr_code
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="heartbeatText != null  and heartbeatText != ''">heartbeat_text = #{heartbeatText},</if>
+            <if test="createTime != null ">create_time = #{createTime},</if>
+            <if test="firstTimeBinding != null ">first_time_binding = #{firstTimeBinding},</if>
+            <if test="adminUserId != null ">admin_user_id = #{adminUserId},</if>
+            <if test="equipmentId != null ">equipment_id = #{equipmentId},</if>
+            <if test="qrCodeUrl != null  and qrCodeUrl != ''">qr_code_url = #{qrCodeUrl},</if>
+            <if test="qrCodePic != null  and qrCodePic != ''">qr_code_pic = #{qrCodePic},</if>
+            <if test="equipmentProductionSite != null  and equipmentProductionSite != ''">equipment_production_site = #{equipmentProductionSite},</if>
+            <if test="equipmentProductionBatch != null  and equipmentProductionBatch != ''">equipment_production_batch = #{equipmentProductionBatch},</if>
+            <if test="equipmentProductionDate != null  and equipmentProductionDate != ''">equipment_production_date = #{equipmentProductionDate},</if>
+            <if test="equipmentModel != null  and equipmentModel != ''">equipment_model = #{equipmentModel},</if>
+            <if test="adminPhone != null  and adminPhone != ''">admin_phone =#{adminPhone},</if>
+            <if test="adminAddress != null  and adminAddress != ''">admin_address =#{adminAddress},</if>
+        </trim>
+        where qr_code_id = #{qrCodeId}
+    </update>
+
+    <delete id="deleteDbQrCodeById" parameterType="Long">
+        delete from db_qr_code where qr_code_id = #{qrCodeId}
+    </delete>
+
+    <delete id="deleteDbQrCodeByIds" parameterType="String">
+        delete from db_qr_code where qr_code_id in 
+        <foreach item="qrCodeId" collection="array" open="(" separator="," close=")">
+            #{qrCodeId}
+        </foreach>
+    </delete>
+    
+</mapper>
